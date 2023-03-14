@@ -1,3 +1,9 @@
+export const formateador = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0
+})
+
  export function pintarProductos(productos){
     productos.forEach(function (producto) {
 
@@ -20,15 +26,26 @@
         nombre.textContent=producto.nombre
      
         // Crear un precio
-        let precio = document.createElement("h5")
-        precio.classList.add("text-center", "text-success", "fw-bold")
-        precio.textContent="usd " + producto.precio
+       // let precio = document.createElement("h5")
+       //precio.classList.add("text-center", "text-success", "fw-bold")
+      //precio.textContent="$ " + producto.precio
 
+        
+    
         // Crear una descripción
         let descripcion=document.createElement("descripcion")
         descripcion.classList.add("text-center","d-none")
         descripcion.textContent=producto.descripcion
+
+        // crear un precio
+        let precioDisplay = document.createElement("h5")
+        precioDisplay.classList.add("text-center", "text-rojo", "fw-bold", "mb-3")
+        precioDisplay.textContent = formateador.format(producto.precio)
         
+    
+        let precioOculto = document.createElement("h1")
+        precioOculto.classList.add("d-none")
+        precioOculto.textContent = producto.precio
 
         //Detectando evento
         tarjeta.addEventListener("mouseover",function(){
@@ -42,14 +59,12 @@
         //padres e hijos
         tarjeta.appendChild(imagen)
         tarjeta.appendChild(nombre)
-        tarjeta.appendChild(precio)
         tarjeta.appendChild(descripcion)
+        tarjeta.appendChild(precioDisplay)
+        tarjeta.appendChild(precioOculto)
+        //tarjeta.appendChild(precio)
         columna.appendChild(tarjeta)
         fila.appendChild(columna)
-        
-     
      })
-     
-     
      
 }

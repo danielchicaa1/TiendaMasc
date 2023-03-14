@@ -1,38 +1,30 @@
 // Llamo a la memoria para acceder a los datos guardados
+import {EjecutarApiTasa} from "../helpers/ampliarinfo.js";
+import {formateador} from "../helpers/pintarProductos.js";
+
+//Pintar el producto
 let infoProducto=JSON.parse(localStorage.getItem("producto"))
-console.log(infoProducto);
 let foto=document.getElementById("foto")
 foto.src=infoProducto.foto
-
-let nombre=document.getElementById("titulo")
+let titulo=document.getElementById("titulo")
 titulo.textContent=infoProducto.nombre
-
 let precio=document.getElementById("precio")
-precio.textContent=infoProducto.precio
-
+precio.innerHTML=infoProducto.precio
 let descripcion=document.getElementById("descripcion")
 descripcion.textContent=infoProducto.descripcion
-/*
-function ConvertirMoneda(tasa){
-    let precioUSD=infoProducto.precio * tasa
-    console.log(precioUSD);
-}
 
-//API
+// convertiendo las monedas
+let botonConvertir = document.getElementById("conversor")
+botonConvertir.addEventListener("click", async () => await EjecutarApiTasa())
 
-async function cambioTasa(){
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': '074f02bb28msh1bbc96dbaa0f511p144e97jsn6913cd3a583f',
-            'X-RapidAPI-Host': 'alpha-vantage.p.rapidapi.com'
-        }
-    };
-    
-    let response = await fetch('https://alpha-vantage.p.rapidapi.com/query?to_currency=USD&function=CURRENCY_EXCHANGE_RATE&from_currency=COP', options)
-    let datos = await response.json()
-    let tasa = datos ['Realtime Currency Exchange Rate']['5. Exchange Rate']
+// evitando problemas con el input de cantidad
+let cantidad = document.getElementById("cantidad")
+cantidad.addEventListener("keydown", (tecla) => {
+    let teclasProhibidas = ["e", "-", "+", "*", "/"]
+    if (teclasProhibidas.includes(tecla.key)) {
+        tecla.preventDefault()
+    }
+})
 
-}
-*/
+
 
