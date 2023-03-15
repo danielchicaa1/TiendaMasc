@@ -15,15 +15,15 @@ let infoProducto = JSON.parse(localStorage.getItem("producto"))
 }
 
 function ConvertirMoneda(tasa){
-    let spanPrecio = getElementById("conversor")
+    let spanPrecio = document.getElementById("conversor")
     let precioUSD =  infoProducto.precio * tasa
     spanPrecio.textContent = "$ " + precioUSD.toFixed(2)
 
-    //let bandera = document.getElementById("bandera")
-    //bandera.src=""
+    let bandera = document.getElementById("bandera")
+    bandera.src=""
 
 }
-
+ 
 export function traducirTexto(texto) {
     const encodedParams = new URLSearchParams();
     encodedParams.append("from", "en");
